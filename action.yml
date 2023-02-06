@@ -1,6 +1,0 @@
-# action.yml
-name: 'sonar-cppcheck-image'
-description: '包含sonar-scaner 和cppcheck的镜像'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
