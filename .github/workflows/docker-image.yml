@@ -28,4 +28,4 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         push: true
-        tags: ytianxia6/sonar-cppcheck:$(date +%s)     
+        tags: ytianxia6/sonar-cppcheck:latest, ytianxia6/sonar-cppcheck:1.0
