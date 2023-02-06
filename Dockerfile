@@ -1,4 +1,4 @@
-FROM alpine:3.17
+FROM sonarsource/sonar-scanner-cli
 
 # 安装cppcheck
 RUN apk add cppcheck
