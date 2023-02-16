@@ -10,15 +10,16 @@ FROM sonarsource/sonar-scanner-cli
 
 RUN wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.35-r0/glibc-bin-2.35-r0.apk && \
     wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.35-r0/glibc-i18n-2.35-r0.apk && \
-    apk add glibc-bin-2.35-r0.apk glibc-i18n-2.35-r0.apk && \
-    /usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8
+    apk add glibc-bin-2.35-r0.apk glibc-i18n-2.35-r0.apk
+
 
 
 # Iterate through all locale and install it
 # Note that locale -a is not available in alpine linux, use `/usr/glibc-compat/bin/locale -a` instead
-#COPY ./locale.md /locale.md
-#RUN cat locale.md | xargs -i /usr/glibc-compat/bin/localedef -i {} -f UTF-8 {}.UTF-8
+COPY ./locale.md /locale.md
+RUN cat locale.md | xargs -i /usr/glibc-compat/bin/localedef -i {} -f UTF-8 {}.UTF-8
 
+#RUN /usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8
 
 # Set the lang, you can also specify it as as environment variable through docker-compose.yml
 #ENV LANG=en_US.UTF-8 \
