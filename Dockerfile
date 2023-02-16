@@ -1,6 +1,6 @@
 FROM sonarsource/sonar-scanner-cli
 
-ARG VERSION_GLIBC=2.34-r0
+ARG VERSION_GLIBC=2.35-r0
 # Install language pack
 #RUN apk --no-cache add ca-certificates wget && \
 #    wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
@@ -10,17 +10,15 @@ ARG VERSION_GLIBC=2.34-r0
 #    apk add glibc-bin-2.25-r0.apk glibc-i18n-2.25-r0.apk glibc-2.25-r0.apk
 
 RUN apk --no-cache add ca-certificates && \
-    wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub
-
-RUN wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${VERSION_GLIBC}/glibc-${VERSION_GLIBC}.apk && \
-    apk add glibc-${VERSION_GLIBC}.apk
+    wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
+    wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${VERSION_GLIBC}/glibc-${VERSION_GLIBC}.apk && \
+    apk add --force-overwrite glibc-${VERSION_GLIBC}.apk && \
+    rm -f glibc-${VERSION_GLIBC}.apk
 
 RUN wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${VERSION_GLIBC}/glibc-bin-${VERSION_GLIBC}.apk && \
-    wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${VERSION_GLIBC}/glibc-i18n-${VERSION_GLIBC}.apk
-
-RUN apk add glibc-bin-${VERSION_GLIBC}.apk glibc-i18n-${VERSION_GLIBC}.apk
-
-
+    wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${VERSION_GLIBC}/glibc-i18n-${VERSION_GLIBC}.apk && \
+    RUN apk add glibc-bin-${VERSION_GLIBC}.apk glibc-i18n-${VERSION_GLIBC}.apk && \
+    rm -f glibc-bin-${VERSION_GLIBC}.apk glibc-i18n-${VERSION_GLIBC}.apk
 
 # Iterate through all locale and install it
 # Note that locale -a is not available in alpine linux, use `/usr/glibc-compat/bin/locale -a` instead
