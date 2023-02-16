@@ -17,7 +17,7 @@ RUN apk --no-cache add ca-certificates && \
 
 RUN wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${VERSION_GLIBC}/glibc-bin-${VERSION_GLIBC}.apk && \
     wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${VERSION_GLIBC}/glibc-i18n-${VERSION_GLIBC}.apk && \
-    RUN apk add glibc-bin-${VERSION_GLIBC}.apk glibc-i18n-${VERSION_GLIBC}.apk && \
+    apk add glibc-bin-${VERSION_GLIBC}.apk glibc-i18n-${VERSION_GLIBC}.apk && \
     rm -f glibc-bin-${VERSION_GLIBC}.apk glibc-i18n-${VERSION_GLIBC}.apk
 
 # Iterate through all locale and install it
