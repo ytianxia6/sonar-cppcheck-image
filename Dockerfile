@@ -9,8 +9,9 @@ FROM sonarsource/sonar-scanner-cli
 #    apk add glibc-bin-2.25-r0.apk glibc-i18n-2.25-r0.apk glibc-2.25-r0.apk
 
 RUN wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.35-r0/glibc-bin-2.35-r0.apk && \
-    wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.35-r0/glibc-i18n-2.35-r0.apk && \
-    apk add glibc-bin-2.35-r0.apk glibc-i18n-2.35-r0.apk
+    wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.35-r0/glibc-i18n-2.35-r0.apk
+
+RUN    apk add glibc-bin-2.35-r0.apk glibc-i18n-2.35-r0.apk
 
 
 
